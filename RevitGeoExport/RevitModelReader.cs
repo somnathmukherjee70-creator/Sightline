@@ -49,6 +49,9 @@ namespace RevitGeoExport
         /// <summary>The coordinate system the shared coordinates are in, when one could be found.</summary>
         public ProjectedCrs DetectedCrs { get; private set; }
 
+        /// <summary>False when the shared coordinates are near 0,0, so a grid (EPSG) can't place the model.</summary>
+        public bool HasSurveyCoordinates { get; private set; }
+
         /// <summary>What was found while detecting the coordinate system, for the dialog.</summary>
         public string DetectionNote { get; private set; }
 
@@ -91,6 +94,7 @@ namespace RevitGeoExport
                 if (ProjectedCrs.TryParse(id, out var crs) || ProjectedCrs.TryParse(site.GeoCoordinateSystemDefinition, out crs))
                 {
                     DetectedCrs = crs;
+                    HasSurveyCoordinates = true;
                     DetectionNote = $"Found in the Revit project: {id}.";
                     return;
                 }
@@ -108,6 +112,7 @@ namespace RevitGeoExport
                 if (point == null || Math.Abs(point.X) * FeetToMeters < RealCoordinateThresholdMeters && Math.Abs(point.Y) * FeetToMeters < RealCoordinateThresholdMeters)
                     continue;
                 sample = sample ?? point;
+                HasSurveyCoordinates = true;
 
                 var match = BestMatch(point);
                 if (match != null)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
@@ -37,6 +38,7 @@ namespace RevitGeoExport
     public sealed class ExportDialog : Form
     {
         private readonly TextBox _crs = new TextBox { Width = 260 };
+        private bool _hasSurveyCoordinates;
         private readonly Label _crsStatus = Hint("");
         private readonly TextBox _coordinates = new TextBox { Width = 260 };
         private readonly ComboBox _anchor = new ComboBox { DropDownStyle = ComboBoxStyle.DropDownList, Width = 260 };
@@ -53,9 +55,12 @@ namespace RevitGeoExport
         private readonly CheckBox _save = new CheckBox { Text = "Save these coordinates to the Revit project location", AutoSize = true };
         private readonly TextBox _output = new TextBox { Width = 260 };
 
-        public ExportDialog(RevitLocation location, string defaultOutput)
+        /// <param name="saved">This project's values from the last export, applied over the defaults.</param>
+        public ExportDialog(RevitLocation location, string defaultOutput, IDictionary<string, string> saved = null)
         {
-            Text = "Place model on map";
+            // The build number shows which version is installed (set by the GitHub build).
+            var version = typeof(App).Assembly.GetName().Version;
+            Text = $"Place model on map — build {version.Build}";
             using (var icon = App.OpenResource("logo.ico"))
                 Icon = new System.Drawing.Icon(icon);
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -67,6 +72,7 @@ namespace RevitGeoExport
 
             _crs.Text = location.DetectedCrs?.Epsg.ToString(CultureInfo.InvariantCulture) ?? "";
             _crs.TextChanged += (s, e) => UpdatePlacementMode(location.DetectionNote);
+            _hasSurveyCoordinates = location.HasSurveyCoordinates;
             _coordinates.Text = string.Format(CultureInfo.InvariantCulture, "{0:0.0000000}, {1:0.0000000}", location.LatitudeDegrees, location.LongitudeDegrees);
             _anchor.Items.AddRange(new object[] { "Survey Point", "Project Base Point", "Internal Origin" });
             _anchor.SelectedIndex = 0;
@@ -84,7 +90,7 @@ namespace RevitGeoExport
             browse.Click += (s, e) => Browse();
 
             var grid = new TableLayoutPanel { ColumnCount = 2, AutoSize = true, Dock = DockStyle.Fill };
-            AddRow(grid, "Coordinate system (EPSG)", _crs);
+            AddRow(grid, "Coordinate system (EPSG, optional)", _crs);
             AddRow(grid, "", _crsStatus);
             AddRow(grid, "Latitude, longitude", _coordinates);
             AddRow(grid, "", Hint($"Revit location: {location.PlaceName}. Paste from Google Maps (right-click a spot › copy the coordinates)."));
@@ -107,7 +113,70 @@ namespace RevitGeoExport
             AddRow(grid, "", Stack(ok, cancel));
 
             Controls.Add(grid);
+            if (saved != null)
+                Restore(saved);
             UpdatePlacementMode(location.DetectionNote);
+        }
+
+        /// <summary>The values to remember for this project.</summary>
+        public Dictionary<string, string> ToSaved() => new Dictionary<string, string>
+        {
+            ["crs"] = _crs.Text.Trim(),
+            ["coordinates"] = _coordinates.Text.Trim(),
+            ["anchor"] = _anchor.SelectedIndex.ToString(CultureInfo.InvariantCulture),
+            ["rotation"] = _rotation.Value.ToString(CultureInfo.InvariantCulture),
+            ["altitude"] = _altitude.SelectedIndex.ToString(CultureInfo.InvariantCulture),
+            ["elevation"] = _elevation.Value.ToString(CultureInfo.InvariantCulture),
+            ["offset"] = _offset.Value.ToString(CultureInfo.InvariantCulture),
+            ["content"] = _content.SelectedIndex.ToString(CultureInfo.InvariantCulture),
+            ["detail"] = _detail.SelectedIndex.ToString(CultureInfo.InvariantCulture),
+            ["glb"] = _glb.Checked.ToString(),
+            ["kmz"] = _kmz.Checked.ToString(),
+            ["geojson"] = _geoJson.Checked.ToString(),
+            ["webmap"] = _webMap.Checked.ToString(),
+            ["output"] = _output.Text.Trim(),
+        };
+
+        private void Restore(IDictionary<string, string> saved)
+        {
+            string Get(string key) => saved.TryGetValue(key, out var value) ? value : null;
+
+            // A coordinate system typed last time wins; an empty one leaves the detected system in place.
+            if (!string.IsNullOrEmpty(Get("crs")))
+                _crs.Text = Get("crs");
+            if (!string.IsNullOrEmpty(Get("coordinates")))
+                _coordinates.Text = Get("coordinates");
+            SetIndex(_anchor, Get("anchor"));
+            SetIndex(_altitude, Get("altitude"));
+            SetIndex(_content, Get("content"));
+            SetIndex(_detail, Get("detail"));
+            SetNumber(_rotation, Get("rotation"));
+            SetNumber(_elevation, Get("elevation"));
+            SetNumber(_offset, Get("offset"));
+            SetCheck(_glb, Get("glb"));
+            SetCheck(_kmz, Get("kmz"));
+            SetCheck(_geoJson, Get("geojson"));
+            SetCheck(_webMap, Get("webmap"));
+            if (!string.IsNullOrEmpty(Get("output")))
+                _output.Text = Get("output");
+        }
+
+        private static void SetIndex(ComboBox box, string value)
+        {
+            if (int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out int index) && index >= 0 && index < box.Items.Count)
+                box.SelectedIndex = index;
+        }
+
+        private static void SetNumber(NumericUpDown box, string value)
+        {
+            if (decimal.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal number))
+                box.Value = Math.Max(box.Minimum, Math.Min(box.Maximum, number));
+        }
+
+        private static void SetCheck(CheckBox box, string value)
+        {
+            if (bool.TryParse(value, out bool isChecked))
+                box.Checked = isChecked;
         }
 
         private bool UsesCoordinateSystem => !string.IsNullOrWhiteSpace(_crs.Text);
@@ -116,10 +185,12 @@ namespace RevitGeoExport
         private void UpdatePlacementMode(string detectionNote)
         {
             bool parsed = ProjectedCrs.TryParse(_crs.Text, out var crs);
+            bool misleading = UsesCoordinateSystem && parsed && !_hasSurveyCoordinates;
             _crsStatus.Text = !UsesCoordinateSystem ? detectionNote
+                : misleading ? "This project's shared coordinates are near 0,0, so a grid would put the model at the grid's origin, far from the site. Leave this empty to place it by latitude/longitude."
                 : parsed ? $"Placed automatically by the model's shared coordinates in {crs}."
                 : "Not a supported coordinate system (UTM on WGS84/NAD83/ETRS89/GDA, Dubai DLTM 3997, Pennsylvania State Plane 2271/2272/32128/32129, or 3857).";
-            _crsStatus.ForeColor = UsesCoordinateSystem && !parsed ? System.Drawing.Color.Firebrick : System.Drawing.SystemColors.GrayText;
+            _crsStatus.ForeColor = UsesCoordinateSystem && (!parsed || misleading) ? System.Drawing.Color.Firebrick : System.Drawing.SystemColors.GrayText;
 
             _coordinates.Enabled = _anchor.Enabled = _rotation.Enabled = _save.Enabled = !UsesCoordinateSystem;
             if (UsesCoordinateSystem)

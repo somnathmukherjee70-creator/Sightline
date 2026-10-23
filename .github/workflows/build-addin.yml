@@ -19,7 +19,7 @@ jobs:
         run: dotnet test RevitGeoExport.Core.Tests -c Release
 
       - name: Build
-        run: dotnet build RevitGeoExport -c Release
+        run: dotnet build RevitGeoExport -c Release -p:Version=1.0.${{ github.run_number }}
 
       - name: Package
         shell: pwsh

@@ -75,7 +75,8 @@ Works with Revit 2024, 2025 and 2026 on Windows.
 2. Unzip it anywhere.
 3. Close Revit and double-click **`install.bat`**. It finds every Revit version on the computer
    and copies the right build into `%AppData%\Autodesk\Revit\Addins\<version>\`.
-4. Start Revit and click **Always Load** when it asks about *Revit Geo Export*.
+4. Start Revit and click **Always Load** when it asks about *Revit Geo Export*. The export dialog's
+   title shows the build number, matching the GitHub Actions run you downloaded, so you can confirm the update.
 5. The button is on the **Add-Ins** tab: **Geo Export › Place on Map**.
 
 To uninstall, run `install.bat -Uninstall` from a command prompt.

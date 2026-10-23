@@ -32,12 +32,15 @@ namespace RevitGeoExport
                 ? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
                 : Path.GetDirectoryName(doc.PathName);
 
+            // Each project remembers its last export settings, so it only needs setting up once.
+            string project = string.IsNullOrEmpty(doc.PathName) ? doc.Title : doc.PathName;
             ExportSettings settings;
-            using (var dialog = new ExportDialog(location, Path.Combine(folder, title)))
+            using (var dialog = new ExportDialog(location, Path.Combine(folder, title), SettingsStore.Load(project)))
             {
                 if (dialog.ShowDialog() != DialogResult.OK)
                     return Result.Cancelled;
                 settings = dialog.Settings;
+                SettingsStore.Save(project, dialog.ToSaved());
             }
 
             if (settings.SaveLocationToProject)
