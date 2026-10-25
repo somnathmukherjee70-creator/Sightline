@@ -324,6 +324,57 @@ table.sched tr.click:hover td { background: var(--panel-2); }
 .snap-toast span { font-size: 11px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
 @media (max-width: 640px) { .snap-toast { flex-wrap: wrap; } .snap-toast [data-st="all"] { display: none; } }
 
+/* find */
+.find { position: relative; display: flex; align-items: center; gap: 6px; height: 32px; padding: 0 8px; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel-2); width: 280px; max-width: 100%; }
+.find:focus-within { border-color: var(--accent); background: var(--panel); }
+.find svg { width: 15px; height: 15px; color: var(--ink-2); flex: none; }
+.find input { border: 0; background: none; flex: 1; min-width: 0; outline: none; height: 100%; }
+.find kbd { font-family: var(--font-mono); font-size: 11px; color: var(--ink-2); border: 1px solid var(--line); border-radius: 3px; padding: 0 5px; }
+.find:focus-within kbd { display: none; }
+.find-list { position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 40; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 14px 34px rgb(0 0 0 / .18); padding: 4px; display: grid; min-width: 280px; }
+.find-row { display: grid; text-align: left; border: 0; background: none; padding: 6px 8px; border-radius: 5px; cursor: pointer; min-width: 0; }
+.find-row b { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.find-row span { font-family: var(--font-mono); font-size: 11px; color: var(--ink-2); }
+.find-row.on, .find-row:hover { background: var(--accent-soft); }
+.find-none { padding: 8px; margin: 0; font-size: 12px; }
+@media (max-width: 1180px) { .find { width: 200px; } }
+@media (max-width: 860px) { .find { order: 3; width: 100%; } }
+
+/* grid in 3D */
+.grid-bubble { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #b5442c; background: #fff; color: #b5442c; display: grid; place-items: center; font: 700 11px var(--font-mono); pointer-events: none; box-shadow: 0 1px 3px rgb(0 0 0 / .2); }
+.col-tag { font: 600 10px var(--font-mono); color: #fff; background: #2b53c2; padding: 1px 5px; border-radius: 3px; pointer-events: none; white-space: nowrap; box-shadow: 0 1px 2px rgb(0 0 0 / .25); }
+
+/* drawings viewer */
+.dwg { position: absolute; inset: 0; z-index: 9; display: grid; grid-template-columns: 230px minmax(0, 1fr); background: var(--panel); }
+.dwg-side { border-right: 1px solid var(--line); padding: 12px; overflow: auto; display: flex; flex-direction: column; gap: 6px; }
+.dwg-head { display: flex; align-items: center; justify-content: space-between; }
+.dwg-head b { font: 600 17px var(--font-display); text-transform: uppercase; letter-spacing: .06em; }
+.dwg-side .cl-label { margin: 10px 0 2px; }
+.dwg-list { display: grid; gap: 2px; }
+.dwg-item { display: flex; align-items: center; gap: 8px; border: 1px solid transparent; background: none; border-radius: 6px; padding: 6px 8px; text-align: left; cursor: pointer; min-width: 0; }
+.dwg-item:hover { background: var(--panel-2); }
+.dwg-item.on { background: var(--accent-soft); border-color: var(--accent); }
+.dwg-item svg { width: 18px; height: 18px; flex: none; color: var(--ink-2); }
+.dwg-item span { display: grid; min-width: 0; flex: 1; }
+.dwg-item b { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dwg-item small { color: var(--ink-2); font-size: 11px; }
+.dwg-add { cursor: pointer; justify-content: center; }
+.dwg-empty { font-size: 12px; line-height: 1.4; margin: 0; }
+.dwg-main { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; min-width: 0; min-height: 0; }
+.dwg-bar { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.dwg-bar b { font-weight: 600; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dwg-pager { display: flex; align-items: center; gap: 4px; font-family: var(--font-mono); font-size: 12px; }
+.dwg-tools { margin-left: auto; display: flex; gap: 4px; flex-wrap: wrap; }
+.dwg-view { position: relative; overflow: hidden; background: var(--ground); cursor: grab; touch-action: none; }
+.dwg-view:active { cursor: grabbing; }
+.dwg-canvas { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.dwg-canvas svg, .dwg-canvas canvas, .dwg-canvas img { display: block; box-shadow: 0 6px 24px rgb(0 0 0 / .18); background: #fff; user-select: none; }
+.dwg-canvas .pe.sel line { stroke: #d98e1f !important; }
+.dwg-canvas .pe.sel text { fill: #d98e1f !important; }
+.dwg-loading { padding: 20px; }
+.dwg-hint { margin: 0; padding: 6px 12px; font-size: 12px; border-top: 1px solid var(--line); }
+@media (max-width: 700px) { .dwg { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); } .dwg-side { max-height: 38vh; border-right: 0; border-bottom: 1px solid var(--line); } }
+
 /* status bar */
 .status { display: flex; gap: 16px; padding-block: 7px; font-size: 12px; color: var(--ink-2); min-width: 0; }
 .status span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -356,6 +407,12 @@ table.sched tr.click:hover td { background: var(--panel-2); }
     <h1><a href="../" class="home-link" title="Sightline home">Sightline</a></h1>
     <span class="model-name" id="modelName">Riverside Office Block</span>
   </div>
+  <div class="find" role="search">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3.5 3.5"/></svg>
+    <input id="findInput" type="search" placeholder="Find, e.g. column B2" autocomplete="off" aria-label="Find an element by number, name or GlobalId" aria-controls="findList">
+    <kbd>/</kbd>
+    <div class="find-list" id="findList" role="listbox" hidden></div>
+  </div>
   <div class="tools">
     <button class="btn only-narrow" id="btnTree" aria-pressed="false">Model</button>
     <button class="btn only-narrow" id="btnProps" aria-pressed="false">Properties</button>
@@ -367,6 +424,9 @@ table.sched tr.click:hover td { background: var(--panel-2); }
     </button>
     <button class="btn primary" id="btnAppend" title="Add .ifc files to the current model (or drop them on the viewport)">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 3v10M3 8h10"/></svg><span class="label-txt">Add IFC</span>
+    </button>
+    <button class="btn" id="btnDwg" aria-pressed="false" title="Floor plans from the model and your own drawing sheets">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="2.5" width="13" height="11"/><path d="M1.5 10h13M9 10v3.5M4 5h4v3H4z"/></svg><span class="label-txt">Drawings</span>
     </button>
     <button class="btn" id="btnClash" aria-pressed="false" title="Find clashes between elements and files">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="5" width="8" height="8" rx="1"/><rect x="6.5" y="2" width="8" height="8" rx="1"/><path d="M6.5 5h3v5h-3z" fill="currentColor" stroke="none" opacity=".55"/></svg><span class="label-txt">Clashes</span>
@@ -381,6 +441,7 @@ table.sched tr.click:hover td { background: var(--panel-2); }
         <button role="menuitem" data-export="elements"><b>Element list</b><span>Every element with all its properties (CSV for Excel)</span></button>
         <button role="menuitem" data-export="quantities"><b>Quantities</b><span>Count, length, area and volume by IFC class (CSV)</span></button>
         <button role="menuitem" data-export="rooms"><b>Room schedule</b><span>Rooms with area and type (CSV)</span></button>
+        <button role="menuitem" data-export="plans"><b>Floor plans</b><span>A plan of every storey with grid, columns and rooms (PDF)</span></button>
         <button role="menuitem" data-export="check"><b>Model check</b><span>Every problem the model check found (CSV)</span></button>
       </div>
     </details>
@@ -404,6 +465,7 @@ table.sched tr.click:hover td { background: var(--panel-2); }
       </div>
       <button class="btn" id="btnXray" aria-pressed="false" title="See through everything except the selection">X-ray</button>
       <button class="btn" id="btnLabels" aria-pressed="true">Room tags</button>
+      <button class="btn" id="btnGrid" aria-pressed="true" title="Grid lines and column numbers">Grid</button>
       <button class="btn" id="btnTint" aria-pressed="false" hidden title="Colour each model file differently">Colour by file</button>
       <button class="btn" id="btnSnap" title="Take a snapshot of the view (S)">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 5.5h2.5L6 3.5h4l1.5 2H14v7.5H2z"/><circle cx="8" cy="9" r="2.4"/></svg>Snapshot</button>
@@ -442,6 +504,32 @@ table.sched tr.click:hover td { background: var(--panel-2); }
       <div><span class="k">Storeys</span><span class="v" id="tbStoreys">0</span></div>
       <div><span class="k">Units</span><span class="v">mm · m²</span></div>
       <div><span class="k">Scale</span><span class="v">NTS</span></div>
+    </div>
+    <div class="dwg" id="dwg" hidden>
+      <aside class="dwg-side" aria-label="Drawings">
+        <div class="dwg-head"><b>Drawings</b><button class="eye" id="dwgClose" aria-label="Close drawings">✕</button></div>
+        <p class="cl-label">From the model</p>
+        <div id="dwgPlans" class="dwg-list"></div>
+        <button class="btn small" id="dwgAllPdf">All floor plans (PDF)</button>
+        <p class="cl-label">Your drawing sheets</p>
+        <div id="dwgSheets" class="dwg-list"></div>
+        <label class="btn small dwg-add"><input type="file" id="dwgFile" accept=".pdf,.png,.jpg,.jpeg,.webp,.gif" multiple hidden>+ Add PDF or image</label>
+      </aside>
+      <div class="dwg-main">
+        <div class="dwg-bar">
+          <b id="dwgTitle">Choose a drawing</b>
+          <span class="dwg-pager" id="dwgPager" hidden><button class="eye" id="dwgPrev" aria-label="Previous page">‹</button><span id="dwgPageNo"></span><button class="eye" id="dwgNext" aria-label="Next page">›</button></span>
+          <span class="dwg-tools">
+            <button class="btn small" id="dwgShow3d" hidden>Show in 3D</button>
+            <button class="btn small" id="dwgZoomOut" aria-label="Zoom out">−</button>
+            <button class="btn small" id="dwgFit">Fit</button>
+            <button class="btn small" id="dwgZoomIn" aria-label="Zoom in">+</button>
+            <button class="btn small primary" id="dwgPlanPdf" hidden>Download PDF</button>
+          </span>
+        </div>
+        <div class="dwg-view" id="dwgView"><div class="dwg-canvas" id="dwgCanvas"></div></div>
+        <p class="dwg-hint muted" id="dwgHint" hidden>Scroll to zoom, drag to pan, click a wall, column or room to see its properties.</p>
+      </div>
     </div>
     <div class="snap-tray" id="snapTray" hidden></div>
     <div class="snap-toast" id="snapToast" hidden role="status"></div>
@@ -581,7 +669,7 @@ const xrayMat = new THREE.MeshBasicMaterial({ color: 0x8a948e, transparent: true
 let M = null; // current model
 const state = {
   selected: null, hover: null, xray: false, labels: true, measure: false,
-  hiddenClasses: new Set(), isolated: null, explode: 0, query: '', gizmos: true, pickFace: false,
+  hiddenClasses: new Set(), isolated: null, explode: 0, query: '', gizmos: true, pickFace: false, grid: true,
 };
 let uidSeq = 0;
 
@@ -594,6 +682,8 @@ function newModel(meta) {
   state.hiddenClasses = new Set();
   clearMeasures();
   if (M) clearCuts();
+  clearGrid();
+  planCache.clear();
   M = { root, files: [], storeys: [], elements: [], meshes: [], byUid: new Map(), showGrid: true, coord: null, ...meta };
   return M;
 }
@@ -870,6 +960,11 @@ function buildSample() {
   addWall(rs, roofE, { ...par, name: 'PAR-E', axis: 'z', x: L + EXT / 2 - 0.1, z: -EXT / 2 + 0.2, len: D + EXT - 0.4 });
 
   M.rooms = roomList;
+  // structural grid: numbers across the length, letters across the depth (columns are named after it)
+  M.curFile.grid = [
+    ...[0, 6, 12, 18, 24].map((x, i) => ({ tag: String(i + 1), family: 'u', a: new THREE.Vector3(x, 0, -2.5), b: new THREE.Vector3(x, 0, D + 2.5) })),
+    ...[0, CS, CN, D].map((z, i) => ({ tag: 'ABCD'[i], family: 'v', a: new THREE.Vector3(-2.5, 0, z), b: new THREE.Vector3(L + 2.5, 0, z) })),
+  ];
   M.root.position.set(-L / 2, 0, -D / 2);
   finishLoad();
   addPlane(AXES.y, H + 1.2, 'Plan cut'); // open on a plan through Level 01
@@ -962,7 +1057,7 @@ async function loadIfc(file, append) {
       if (!entry) {
         const line = api.GetLine(id, eid);
         entry = {
-          el: { ifcClass: api.GetNameFromTypeCode(line.type), name: line.Name?.value || line.ObjectType?.value || `#${eid}`, guid: line.GlobalId?.value || '', expressID: eid },
+          el: { ifcClass: api.GetNameFromTypeCode(line.type), name: line.Name?.value || line.ObjectType?.value || `#${eid}`, guid: line.GlobalId?.value || '', tag: line.Tag?.value || '', expressID: eid },
           storey: storeyFor(eid), meshes: [],
         };
         pending.set(eid, entry);
@@ -992,6 +1087,7 @@ async function loadIfc(file, append) {
     });
     // web-ifc works out the origin shift while streaming, so read it afterwards
     if (first) M.coord = new THREE.Matrix4().fromArray(api.GetCoordinationMatrix(id));
+    fileRec.grid = readIfcGrids(api, ifc.W, id);
     const edges = tris < 400000;
     for (const { el, storey, meshes } of pending.values()) {
       if (edges) meshes.forEach(withEdges);
@@ -1044,6 +1140,10 @@ function refreshModel(fit) {
   if (files.length < 2 && state.tintFiles) { state.tintFiles = false; $('#btnTint').setAttribute('aria-pressed', false); }
   M.root.updateMatrixWorld(true);
   M.baseBox = new THREE.Box3().setFromObject(M.root);
+  planCache.clear();
+  buildGrid();
+  if (dwg.current?.kind === 'plan') dwg.current = null;
+  if (dwg.open) openDrawings();
   buildTree();
   applyVisibility();
   applyLook();
@@ -1101,6 +1201,7 @@ function updateLabels() {
     }
     el.label.visible = show;
   }
+  updateColTags(planes);
 }
 let labelsDirty = true, lastLabelCheck = 0;
 controls.addEventListener('change', () => (labelsDirty = true));
@@ -1341,6 +1442,7 @@ function syncCuts(rebuildList) {
   }
   updateLabels();
   if (rebuildList) renderCutList(); else refreshCutRows();
+  placeGrid();
 }
 
 /* section panel */
@@ -1760,6 +1862,7 @@ function select(el, fromTree) {
     $('#hoverInfo').textContent = `Selected: ${el.ifcClass} · ${el.name}`;
   }
   renderProps();
+  syncPlanSelection();
 }
 
 const fmt = (v) => (v === true ? 'Yes' : v === false ? 'No' : esc(v));
@@ -1804,7 +1907,7 @@ function renderProps() {
       <button class="btn small" id="actIsoStorey">Isolate storey</button>
       <button class="btn small" id="actBox">Section box</button>
     </div>`;
-  const ident = { ...(liveFiles().length > 1 ? { Model: M.files[el.file].name } : {}), Storey: s.name, ...(Number.isFinite(s.elevation) ? { Elevation: mm(s.elevation) } : {}), ...(el.material ? { Material: el.material } : {}), ...(el.expressID ? { ExpressID: '#' + el.expressID } : {}) };
+  const ident = { ...(liveFiles().length > 1 ? { Model: M.files[el.file].name } : {}), ...(el.gridRef ? { 'Grid position': el.gridRef } : {}), ...(el.tag ? { Tag: el.tag } : {}), Storey: s.name, ...(Number.isFinite(s.elevation) ? { Elevation: mm(s.elevation) } : {}), ...(el.material ? { Material: el.material } : {}), ...(el.expressID ? { ExpressID: '#' + el.expressID } : {}) };
   box.innerHTML = head + psetHtml('Identity', ident) + Object.entries(el.psets || {}).map(([k, v]) => psetHtml(k, v)).join('') + (M.files[el.file].ifcId != null ? '<p class="muted" id="psetLoading" style="padding-top:8px">Reading property sets…</p>' : '');
   $('#actZoom').onclick = () => zoomTo(el);
   if ($('#hcBack')) $('#hcBack').onclick = () => select(null);
@@ -2056,7 +2159,7 @@ $('#exportMenu').addEventListener('click', async (e) => {
   $('#exportMenu').open = false;
   if (!M) return;
   try {
-    ({ elements: exportElementsCsv, quantities: exportQuantitiesCsv, rooms: exportRoomsCsv, pdf: openPrintReport, check: exportCheckCsv })[b.dataset.export]();
+    ({ elements: exportElementsCsv, quantities: exportQuantitiesCsv, rooms: exportRoomsCsv, pdf: openPrintReport, check: exportCheckCsv, plans: () => floorPlansPdf().catch(clashExportFailed) })[b.dataset.export]();
   } catch (err) {
     console.error(err);
     hideBusy();
@@ -3180,6 +3283,713 @@ async function snapSheetPdf() {
   toast(`Saved ${snaps.length} snapshot${snaps.length > 1 ? 's' : ''} as a PDF.`);
 }
 
+/* ---------- structural grid, column numbers and find ---------- */
+// Grid axes live in model-local coordinates: { tag, family: 'u' | 'v', a: Vector3, b: Vector3 }.
+const SI_PREFIX = { MILLI: 0.001, CENTI: 0.01, DECI: 0.1, KILO: 1000 };
+function ifcLengthScale(api, W, id) {
+  try {
+    const ua = api.GetLineIDsWithType(id, W.IFCUNITASSIGNMENT);
+    if (!ua.size()) return 1;
+    for (const h of api.GetLine(id, ua.get(0), false).Units || []) {
+      const u = api.GetLine(id, h.value, false);
+      if (u?.UnitType?.value !== 'LENGTHUNIT') continue;
+      if (/FOOT/i.test(u.Name?.value || '')) return 0.3048;
+      if (/INCH/i.test(u.Name?.value || '')) return 0.0254;
+      return SI_PREFIX[u.Prefix?.value] || 1;
+    }
+  } catch (err) { console.warn(err); }
+  return 1;
+}
+const coordVal = (c) => +(c?.value ?? c);
+// IfcLocalPlacement chain to a matrix in IFC project coordinates (file units, Z up).
+function ifcPlacement(api, id, pid, depth = 0) {
+  const m = new THREE.Matrix4();
+  if (!pid || depth > 30) return m;
+  const lp = api.GetLine(id, pid, false);
+  if (!lp) return m;
+  if (lp.RelativePlacement) {
+    const ap = api.GetLine(id, lp.RelativePlacement.value, false);
+    const loc = ap.Location ? api.GetLine(id, ap.Location.value, false).Coordinates.map(coordVal) : [0, 0, 0];
+    const dir = (h, d) => {
+      if (!h) return d;
+      const r = api.GetLine(id, h.value, false).DirectionRatios.map(coordVal);
+      return new THREE.Vector3(r[0], r[1], r[2] || 0).normalize();
+    };
+    const z = dir(ap.Axis, new THREE.Vector3(0, 0, 1));
+    let x = dir(ap.RefDirection, new THREE.Vector3(1, 0, 0));
+    x = x.sub(z.clone().multiplyScalar(x.dot(z))).normalize();
+    const y = new THREE.Vector3().crossVectors(z, x);
+    m.makeBasis(x, y, z).setPosition(loc[0], loc[1], loc[2] || 0);
+  }
+  const parent = lp.PlacementRelTo ? ifcPlacement(api, id, lp.PlacementRelTo.value, depth + 1) : new THREE.Matrix4();
+  return parent.multiply(m);
+}
+function readIfcGrids(api, W, id) {
+  const out = [];
+  try {
+    const scale = ifcLengthScale(api, W, id);
+    const ids = api.GetLineIDsWithType(id, W.IFCGRID);
+    for (let i = 0; i < ids.size(); i++) {
+      const g = api.GetLine(id, ids.get(i), false);
+      const pm = ifcPlacement(api, id, g.ObjectPlacement?.value);
+      const toLocal = (c) => {
+        const v = new THREE.Vector3(c[0], c[1], c[2] || 0).applyMatrix4(pm).multiplyScalar(scale);
+        return new THREE.Vector3(v.x, v.z, -v.y).applyMatrix4(M.coord);
+      };
+      for (const [family, list] of [['u', g.UAxes], ['v', g.VAxes]]) {
+        for (const h of list || []) {
+          const ax = api.GetLine(id, h.value, false);
+          const cv = ax?.AxisCurve && api.GetLine(id, ax.AxisCurve.value, false);
+          const pts = (cv?.Points || []).map((p) => api.GetLine(id, p.value, false).Coordinates.map(coordVal));
+          if (pts.length < 2) continue;
+          out.push({ tag: String(ax.AxisTag?.value ?? ''), family, a: toLocal(pts[0]), b: toLocal(pts[pts.length - 1]) });
+        }
+      }
+    }
+  } catch (err) { console.warn('Could not read the grid', err); }
+  return out;
+}
+// No grid in the file: derive one from where the columns stand.
+function inferGrid() {
+  const cols = M.elements.filter((e) => /^IfcColumn/.test(e.ifcClass) && !M.files[e.file].removed);
+  if (cols.length < 3) return [];
+  const pts = cols.map((e) => M.root.worldToLocal(new THREE.Box3().setFromObject(e.object).getCenter(new THREE.Vector3())));
+  const cluster = (vals) => {
+    vals.sort((a, b) => a - b);
+    const groups = [];
+    for (const v of vals) {
+      const g = groups[groups.length - 1];
+      if (g && v - g[g.length - 1] < 0.4) g.push(v); else groups.push([v]);
+    }
+    return groups.filter((g) => g.length >= 2).map((g) => g.reduce((a, b) => a + b, 0) / g.length);
+  };
+  const xs = cluster(pts.map((p) => p.x)), zs = cluster(pts.map((p) => p.z));
+  if (xs.length < 2 || zs.length < 2) return [];
+  const bb = M.root.worldToLocal(M.baseBox.min.clone()), bt = M.root.worldToLocal(M.baseBox.max.clone());
+  const x0 = Math.min(bb.x, xs[0]) - 2, x1 = Math.max(bt.x, xs[xs.length - 1]) + 2;
+  const z0 = Math.min(bb.z, zs[0]) - 2, z1 = Math.max(bt.z, zs[zs.length - 1]) + 2;
+  return [
+    ...xs.map((x, i) => ({ tag: String(i + 1), family: 'u', a: new THREE.Vector3(x, 0, z0), b: new THREE.Vector3(x, 0, z1), inferred: true })),
+    ...zs.map((z, i) => ({ tag: String.fromCharCode(65 + (i % 26)) + (i >= 26 ? Math.floor(i / 26) : ''), family: 'v', a: new THREE.Vector3(x0, 0, z), b: new THREE.Vector3(x1, 0, z), inferred: true })),
+  ];
+}
+function distToAxis2D(p, ax) {
+  const ax2 = ax.b.x - ax.a.x, az = ax.b.z - ax.a.z, len2 = ax2 * ax2 + az * az || 1;
+  const t = Math.max(0, Math.min(1, ((p.x - ax.a.x) * ax2 + (p.z - ax.a.z) * az) / len2));
+  return Math.hypot(p.x - (ax.a.x + t * ax2), p.z - (ax.a.z + t * az));
+}
+function gridRefOf(el) {
+  const p = M.root.worldToLocal(new THREE.Box3().setFromObject(el.object).getCenter(new THREE.Vector3()));
+  const near = (fam) => M.gridAxes.filter((a) => a.family === fam).map((a) => [a, distToAxis2D(p, a)]).filter(([, d]) => d < 0.75).sort((x, y) => x[1] - y[1])[0]?.[0];
+  const u = near('u'), v = near('v');
+  if (!u || !v) return null;
+  const tags = [u.tag, v.tag].sort((x, y) => (/^\d/.test(x) ? 1 : 0) - (/^\d/.test(y) ? 1 : 0));
+  return /^\D/.test(tags[0]) && /^\d/.test(tags[1]) ? tags.join('') : tags.join('/');
+}
+const gridGroup = new THREE.Group(), colTagGroup = new THREE.Group();
+scene.add(gridGroup, colTagGroup);
+const gridLineMat = new THREE.LineDashedMaterial({ color: 0xb5442c, dashSize: 0.9, gapSize: 0.25, transparent: true, opacity: 0.85 });
+function clearGrid() {
+  for (const g of [gridGroup, colTagGroup]) for (const o of [...g.children]) { o.element?.remove(); o.geometry?.dispose(); o.removeFromParent(); }
+}
+function buildGrid() {
+  clearGrid();
+  if (!M) return;
+  const fromFiles = liveFiles().flatMap((f) => f.grid || []);
+  M.gridAxes = fromFiles.length ? fromFiles : inferGrid();
+  M.gridInferred = !fromFiles.length && M.gridAxes.length > 0;
+  for (const ax of M.gridAxes) {
+    const a = M.root.localToWorld(ax.a.clone()).setY(0), b = M.root.localToWorld(ax.b.clone()).setY(0);
+    const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints([a, b]), gridLineMat);
+    line.computeLineDistances();
+    line.raycast = () => {};
+    gridGroup.add(line);
+    for (const p of [a, b]) {
+      const d = document.createElement('div');
+      d.className = 'grid-bubble';
+      d.textContent = ax.tag;
+      const o = new CSS2DObject(d);
+      o.position.copy(p);
+      gridGroup.add(o);
+    }
+  }
+  for (const el of M.elements) {
+    el.gridRef = /^IfcColumn/.test(el.ifcClass) ? gridRefOf(el) : null;
+    el.colTag = null;
+    if (!/^IfcColumn/.test(el.ifcClass) || M.files[el.file].removed) continue;
+    const d = document.createElement('div');
+    d.className = 'col-tag';
+    d.textContent = el.gridRef || el.tag || el.name.split(':')[0];
+    d.title = el.name;
+    const o = new CSS2DObject(d);
+    o.userData.el = el;
+    colTagGroup.add(o);
+    el.colTag = o;
+  }
+  $('#btnGrid').hidden = !M.gridAxes.length && !M.elements.some((e) => e.colTag);
+  placeGrid();
+}
+// Grid lines sit on the ground, or just under a horizontal plan cut so they read like a drawing.
+function placeGrid() {
+  if (!M?.baseBox) return;
+  const yc = cuts.find((c) => c.on && c.kind === 'plane' && c.faces[0].d.y > 0.999);
+  gridGroup.position.y = yc ? yc.faces[0].s - 0.03 : M.baseBox.min.y + 0.02;
+  gridGroup.visible = state.grid;
+  labelsDirty = true;
+}
+function updateColTags(planes) {
+  const box = new THREE.Box3(), p = new THREE.Vector3();
+  for (const o of colTagGroup.children) {
+    const el = o.userData.el;
+    let show = state.grid && !state.clashFocus && isShown(el);
+    if (show) {
+      box.setFromObject(el.object);
+      p.set((box.min.x + box.max.x) / 2, box.max.y, (box.min.z + box.max.z) / 2);
+      const cutTop = planes.filter((pl) => pl.normal.y < -0.999).reduce((m, pl) => Math.min(m, pl.constant), Infinity);
+      p.y = Math.min(p.y, cutTop - 0.05) + 0.15;
+      show = p.y > box.min.y && planes.every((pl) => pl.normal.y < -0.999 || pl.distanceToPoint(p) >= 0);
+      o.position.copy(p);
+    }
+    o.visible = show;
+  }
+}
+$('#btnGrid').addEventListener('click', (e) => {
+  state.grid = !state.grid;
+  e.currentTarget.setAttribute('aria-pressed', state.grid);
+  placeGrid();
+  updateLabels();
+});
+
+/* find */
+function findMatches(q) {
+  q = q.trim().toLowerCase();
+  if (!q || !M) return [];
+  const scored = [];
+  for (const el of M.elements) {
+    if (M.files[el.file].removed) continue;
+    const ref = (el.gridRef || '').toLowerCase(), name = el.name.toLowerCase(), tag = String(el.tag || '').toLowerCase();
+    let s = 0;
+    if (ref && ref === q) s = 100;
+    else if (name === q || tag === q) s = 90;
+    else if (name.startsWith(q)) s = 70;
+    else if (ref.startsWith(q)) s = 65;
+    else if (name.includes(q)) s = 50;
+    else if (tag.includes(q)) s = 45;
+    else if ((el.guid || '').toLowerCase().startsWith(q)) s = 40;
+    else if (el.ifcClass.toLowerCase().includes(q)) s = 10;
+    if (s) scored.push([s + (/^IfcColumn/.test(el.ifcClass) ? 5 : 0), el]);
+  }
+  return scored.sort((a, b) => b[0] - a[0]).slice(0, 8).map(([, el]) => el);
+}
+let findSel = 0;
+function renderFind() {
+  const list = findMatches($('#findInput').value);
+  const box = $('#findList');
+  box.hidden = !$('#findInput').value.trim();
+  findSel = Math.min(findSel, Math.max(0, list.length - 1));
+  box.innerHTML = list.length ? list.map((el, i) => `<button role="option" class="find-row ${i === findSel ? 'on' : ''}" data-uid="${el.uid}" aria-selected="${i === findSel}">
+      <b>${esc(el.gridRef ? `${el.gridRef} · ${el.name}` : el.name)}</b><span>${esc(el.ifcClass)} · ${esc(M.storeys[el.storey].name)}</span></button>`).join('')
+    : '<p class="muted find-none">Nothing matches. Try a column number like B2, a name or a GlobalId.</p>';
+  return list;
+}
+function revealElement(el) {
+  el.hidden = false;
+  state.hiddenClasses.delete(el.ifcClass);
+  M.storeys[el.storey].hidden = false;
+  M.files[el.file].hidden = false;
+  if (state.isolated && !state.isolated.has(el)) state.isolated = null;
+  renderChips();
+  applyVisibility();
+  select(el);
+  if (dwg.open && dwg.current?.kind === 'plan') {
+    if (dwg.current.storey !== el.storey) openPlan(el.storey);
+    centerPlanOn(el);
+  } else zoomTo(el);
+}
+function pickFound(el) {
+  if (!el) return;
+  $('#findInput').value = '';
+  $('#findList').hidden = true;
+  $('#findInput').blur();
+  revealElement(el);
+}
+$('#findInput').addEventListener('input', () => { findSel = 0; renderFind(); });
+$('#findInput').addEventListener('focus', () => { if ($('#findInput').value.trim()) renderFind(); });
+$('#findInput').addEventListener('keydown', (e) => {
+  const list = findMatches($('#findInput').value);
+  if (e.key === 'ArrowDown') { e.preventDefault(); findSel = Math.min(findSel + 1, list.length - 1); renderFind(); }
+  else if (e.key === 'ArrowUp') { e.preventDefault(); findSel = Math.max(findSel - 1, 0); renderFind(); }
+  else if (e.key === 'Enter') { e.preventDefault(); pickFound(list[findSel]); }
+  else if (e.key === 'Escape') { $('#findInput').value = ''; $('#findList').hidden = true; $('#findInput').blur(); }
+});
+$('#findList').addEventListener('pointerdown', (e) => {
+  const b = e.target.closest('[data-uid]');
+  if (b) { e.preventDefault(); pickFound(M.byUid.get(+b.dataset.uid)); }
+});
+$('#findInput').addEventListener('blur', () => setTimeout(() => ($('#findList').hidden = true), 150));
+window.addEventListener('keydown', (e) => {
+  if (e.key === '/' && !e.target.matches('input, textarea, select')) { e.preventDefault(); $('#findInput').focus(); }
+});
+
+/* ---------- floor plan drawings ---------- */
+// A plan is a display list in paper millimetres on an A3 sheet, drawn to SVG on screen and to jsPDF for download.
+const SHEET = { W: 420, H: 297, margin: 7, titleH: 34 };
+const SCALES = [20, 50, 100, 200, 250, 500, 1000, 2000, 5000];
+const planCache = new Map();
+function storeyHasGeometry(s) {
+  return !M.files[s.file].removed && M.elements.some((e) => e.storey === s.index && !NO_CLASH.has(e.ifcClass));
+}
+function slicePlan(s) {
+  const keep = state.explode;
+  if (keep) { state.explode = 0; applyExplode(); }
+  M.root.updateMatrixWorld(true);
+  const els = M.elements.filter((e) => e.storey === s.index && !M.files[e.file].removed);
+  const phys = els.filter((e) => !NO_CLASH.has(e.ifcClass));
+  const boxes = new Map(phys.map((e) => [e, new THREE.Box3().setFromObject(e.object)]));
+  const base = phys.filter((e) => /^Ifc(Wall|Column)/.test(e.ifcClass));
+  const mins = (base.length ? base : phys).map((e) => boxes.get(e).min.y).sort((a, b) => a - b);
+  const floorY = mins[Math.floor(mins.length / 2)];
+  const cutY = floorY + 1.2;
+  const a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3();
+  const groups = [];
+  for (const el of phys) {
+    const bx = boxes.get(el);
+    if (bx.max.y < floorY - 0.05 || bx.min.y > cutY) continue;
+    const g = { el, cut: [], proj: [] };
+    for (const mesh of el.meshes) {
+      const mw = mesh.matrixWorld, geo = mesh.geometry, pos = geo.getAttribute('position'), ix = geo.getIndex();
+      const mb = new THREE.Box3().setFromBufferAttribute(pos).applyMatrix4(mw);
+      if (mb.min.y <= cutY && mb.max.y >= cutY) {
+        const n = ix ? ix.count : pos.count;
+        for (let i = 0; i < n; i += 3) {
+          a.fromBufferAttribute(pos, ix ? ix.getX(i) : i).applyMatrix4(mw);
+          b.fromBufferAttribute(pos, ix ? ix.getX(i + 1) : i + 1).applyMatrix4(mw);
+          c.fromBufferAttribute(pos, ix ? ix.getX(i + 2) : i + 2).applyMatrix4(mw);
+          const pts = [];
+          for (const [p, q] of [[a, b], [b, c], [c, a]]) {
+            const dp = p.y - cutY, dq = q.y - cutY;
+            if ((dp < 0) !== (dq < 0) && dp !== dq) { const t = dp / (dp - dq); pts.push([p.x + (q.x - p.x) * t, p.z + (q.z - p.z) * t]); }
+          }
+          if (pts.length === 2 && Math.hypot(pts[0][0] - pts[1][0], pts[0][1] - pts[1][1]) > 1e-4) g.cut.push([pts[0][0], pts[0][1], pts[1][0], pts[1][1]]);
+        }
+      }
+      // visible edges below the cut, seen from above
+      let eg = mesh.children.find((o) => o.isLineSegments)?.geometry;
+      const tmp = !eg && pos.count < 60000 ? new THREE.EdgesGeometry(geo, 30) : null;
+      eg = eg || tmp;
+      if (eg) {
+        const ep = eg.getAttribute('position');
+        for (let i = 0; i < ep.count; i += 2) {
+          a.fromBufferAttribute(ep, i).applyMatrix4(mw);
+          b.fromBufferAttribute(ep, i + 1).applyMatrix4(mw);
+          if (Math.max(a.y, b.y) > cutY + 1e-3 || Math.min(a.y, b.y) < floorY - 0.02) continue;
+          if (Math.hypot(a.x - b.x, a.z - b.z) < 0.003) continue;
+          g.proj.push([a.x, a.z, b.x, b.z]);
+        }
+      }
+      tmp?.dispose();
+    }
+    if (g.cut.length || g.proj.length) groups.push(g);
+  }
+  const rooms = els.filter((e) => e.ifcClass === 'IfcSpace').map((e) => {
+    const bx = new THREE.Box3().setFromObject(e.object);
+    return { el: e, x: (bx.min.x + bx.max.x) / 2, z: (bx.min.z + bx.max.z) / 2, name: e.name, area: e.area ?? null, type: e.roomType };
+  });
+  const grid = (M.gridAxes || []).map((ax) => {
+    const p = M.root.localToWorld(ax.a.clone()), q = M.root.localToWorld(ax.b.clone());
+    return { tag: ax.tag, x1: p.x, z1: p.z, x2: q.x, z2: q.z };
+  });
+  const cols = phys.filter((e) => /^IfcColumn/.test(e.ifcClass) && boxes.get(e).min.y <= cutY && boxes.get(e).max.y >= cutY)
+    .map((e) => { const bx = boxes.get(e); return { el: e, x: bx.max.x, z: bx.max.z, label: e.gridRef || e.tag || e.name.split(':')[0] }; });
+  if (keep) { state.explode = keep; applyExplode(); }
+  return { storey: s, floorY, cutY, groups, rooms, grid, cols };
+}
+
+function layoutPlan(plan, sheetNo) {
+  const P = [];
+  const line = (x1, y1, x2, y2, o = {}) => P.push({ t: 'line', x1, y1, x2, y2, w: o.w ?? 0.18, color: o.color || '#1b1f1d', dash: o.dash, uid: o.uid, cls: o.cls });
+  const text = (x, y, s, o = {}) => P.push({ t: 'text', x, y, s: String(s), size: o.size ?? 2.5, bold: !!o.bold, anchor: o.anchor || 'start', rot: o.rot || 0, color: o.color || '#1b1f1d', uid: o.uid });
+  const circle = (x, y, r, o = {}) => P.push({ t: 'circle', x, y, r, w: o.w ?? 0.25, color: o.color || '#1b1f1d', fill: o.fill });
+  const rect = (x, y, w, h, o = {}) => P.push({ t: 'rect', x, y, w, h, lw: o.w ?? 0.25, color: o.color || '#1b1f1d', fill: o.fill });
+
+  // world extents of what we draw
+  let u0 = Infinity, u1 = -Infinity, v0 = Infinity, v1 = -Infinity;
+  const ext = (x, z) => { u0 = Math.min(u0, x); u1 = Math.max(u1, x); v0 = Math.min(v0, -z); v1 = Math.max(v1, -z); };
+  for (const g of plan.groups) for (const s of [...g.cut, ...g.proj]) { ext(s[0], s[1]); ext(s[2], s[3]); }
+  for (const g of plan.grid) { ext(g.x1, g.z1); ext(g.x2, g.z2); }
+  if (!isFinite(u0)) { u0 = v0 = 0; u1 = v1 = 1; }
+  const RES = 22; // paper mm kept free around the drawing for bubbles and dimensions
+  const area = { x: SHEET.margin + 6, y: SHEET.margin + 6, w: SHEET.W - 2 * SHEET.margin - 12, h: SHEET.H - 2 * SHEET.margin - SHEET.titleH - 12 };
+  const den = SCALES.find((d) => ((u1 - u0) * 1000) / d <= area.w - 2 * RES && ((v1 - v0) * 1000) / d <= area.h - 2 * RES) || SCALES[SCALES.length - 1];
+  const k = 1000 / den;
+  const ox = area.x + (area.w - (u1 - u0) * k) / 2, oy = area.y + (area.h - (v1 - v0) * k) / 2;
+  const X = (x) => ox + (x - u0) * k, Y = (z) => oy + (-z - v0) * k;
+
+  // sheet border
+  rect(SHEET.margin, SHEET.margin, SHEET.W - 2 * SHEET.margin, SHEET.H - 2 * SHEET.margin, { w: 0.5 });
+  // grid lines with bubbles
+  const R = 3.6;
+  for (const g of plan.grid) {
+    const x1 = X(g.x1), y1 = Y(g.z1), x2 = X(g.x2), y2 = Y(g.z2);
+    const len = Math.hypot(x2 - x1, y2 - y1) || 1, ux = (x2 - x1) / len, uy = (y2 - y1) / len;
+    line(x1, y1, x2, y2, { w: 0.18, color: '#b5442c', dash: [6, 1.4, 1, 1.4] });
+    for (const [x, y, s] of [[x1, y1, -1], [x2, y2, 1]]) {
+      const cx = x + ux * R * s, cy = y + uy * R * s;
+      circle(cx, cy, R, { w: 0.3, color: '#b5442c', fill: '#ffffff' });
+      text(cx, cy + 1.25, g.tag, { size: 3.4, bold: true, anchor: 'middle', color: '#b5442c' });
+    }
+  }
+  // dimension strings between parallel gridlines (only for axis-aligned grids)
+  const vert = plan.grid.filter((g) => Math.abs(g.x1 - g.x2) < 0.01).map((g) => g.x1).sort((a, b) => a - b);
+  const horz = plan.grid.filter((g) => Math.abs(g.z1 - g.z2) < 0.01).map((g) => g.z1).sort((a, b) => b - a);
+  const tick = (x, y) => line(x - 1, y + 1, x + 1, y - 1, { w: 0.35 });
+  const dimRow = (vals, at, horizontal) => {
+    if (vals.length < 2) return;
+    const pos = vals.map((v) => (horizontal ? X(v) : Y(v)));
+    const draw = (p1, p2, off, label) => {
+      if (horizontal) { line(p1, off, p2, off, { w: 0.13 }); tick(p1, off); tick(p2, off); text((p1 + p2) / 2, off - 1.2, label, { size: 2.3, anchor: 'middle' }); }
+      else { line(off, p1, off, p2, { w: 0.13 }); tick(off, p1); tick(off, p2); text(off - 1.2, (p1 + p2) / 2, label, { size: 2.3, anchor: 'middle', rot: -90 }); }
+    };
+    for (let i = 0; i < vals.length - 1; i++) draw(pos[i], pos[i + 1], at, Math.round(Math.abs(vals[i + 1] - vals[i]) * 1000));
+    if (vals.length > 2) draw(pos[0], pos[pos.length - 1], at - 7, Math.round(Math.abs(vals[vals.length - 1] - vals[0]) * 1000));
+  };
+  const topY = Math.min(...plan.grid.map((g) => Math.min(Y(g.z1), Y(g.z2))), oy) - 2 * R - 5;
+  const leftX = Math.min(...plan.grid.map((g) => Math.min(X(g.x1), X(g.x2))), ox) - 2 * R - 5;
+  dimRow(vert, topY, true);
+  dimRow(horz, leftX, false);
+  // model lines: projection first, cut lines on top
+  for (const g of plan.groups) for (const s of g.proj) line(X(s[0]), Y(s[1]), X(s[2]), Y(s[3]), { w: 0.13, color: '#6b726d', uid: g.el.uid, cls: 'proj' });
+  for (const g of plan.groups) for (const s of g.cut) line(X(s[0]), Y(s[1]), X(s[2]), Y(s[3]), { w: 0.45, color: '#111513', uid: g.el.uid, cls: 'cut' });
+  // room names and areas
+  for (const r of plan.rooms) {
+    text(X(r.x), Y(r.z) - 0.6, r.name, { size: 2.6, bold: true, anchor: 'middle', uid: r.el.uid });
+    if (r.area != null) text(X(r.x), Y(r.z) + 2.6, `${r.area.toFixed(1)} m²${r.type ? ' · ' + r.type : ''}`, { size: 2.1, anchor: 'middle', color: '#4b544f' });
+  }
+  // column numbers
+  for (const c of plan.cols) text(X(c.x) + 1, Y(c.z) - 1.2, c.label, { size: 2.2, bold: true, color: '#2b53c2', uid: c.el.uid });
+  // north arrow (plan north = up the sheet)
+  const nx = area.x + area.w - 14, ny = area.y + 12;
+  circle(nx, ny, 7, { w: 0.3 });
+  P.push({ t: 'poly', pts: [[nx, ny - 7], [nx + 3, ny + 3], [nx, ny + 1], [nx - 3, ny + 3]], fill: '#1b1f1d' });
+  text(nx, ny - 9, 'N', { size: 3.2, bold: true, anchor: 'middle' });
+  // scale bar
+  const sbx = area.x + 2, sby = SHEET.H - SHEET.margin - SHEET.titleH - 8;
+  const step = den <= 100 ? 1 : den <= 250 ? 2 : den <= 1000 ? 5 : 20;
+  for (let i = 0; i < 5; i++) rect(sbx + i * step * k, sby, step * k, 1.6, { w: 0.2, fill: i % 2 ? '#ffffff' : '#1b1f1d' });
+  text(sbx, sby - 1.5, '0', { size: 2 });
+  text(sbx + 5 * step * k, sby - 1.5, `${5 * step} m`, { size: 2, anchor: 'middle' });
+  // title block
+  const files = liveFiles();
+  const ty = SHEET.H - SHEET.margin - SHEET.titleH, tx = SHEET.margin, tw = SHEET.W - 2 * SHEET.margin;
+  line(tx, ty, tx + tw, ty, { w: 0.5 });
+  const cells = [
+    ['Project', files.length > 1 ? `${files[0].name} + ${files.length - 1} more` : files[0].name, 120],
+    ['Drawing', `${plan.storey.name} · Floor plan`, 92],
+    ['Scale', `1:${den} at A3`, 38],
+    ['Cut height', `${Math.round((plan.cutY - plan.floorY) * 1000)} mm above floor`, 52],
+    ['Date', new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }), 38],
+    ['Sheet', sheetNo, 0],
+  ];
+  let cx = tx;
+  cells.forEach(([k2, v, w], i) => {
+    const cw = w || tx + tw - cx;
+    if (i) line(cx, ty, cx, ty + SHEET.titleH, { w: 0.25 });
+    text(cx + 3, ty + 7, k2.toUpperCase(), { size: 2.1, color: '#5a655e', bold: true });
+    text(cx + 3, ty + 17, v, { size: i === 0 || i === 5 ? 5.2 : 3.4, bold: i === 0 || i === 5 });
+    cx += cw;
+  });
+  text(tx + 3, ty + SHEET.titleH - 4, `Generated from the IFC model by Sightline${M.gridInferred ? ' · grid worked out from column positions' : ''}. Check against the issued drawings before use.`, { size: 2, color: '#5a655e' });
+  return { prims: P, den };
+}
+
+function primsToSvg(P) {
+  const f = (n) => (Math.round(n * 100) / 100).toString();
+  const byUid = new Map(), loose = [];
+  for (const p of P) (p.uid ? (byUid.get(p.uid) || byUid.set(p.uid, []).get(p.uid)) : loose).push(p);
+  const one = (p) => {
+    if (p.t === 'line') return `<line x1="${f(p.x1)}" y1="${f(p.y1)}" x2="${f(p.x2)}" y2="${f(p.y2)}" stroke="${p.color}" stroke-width="${p.w}"${p.dash ? ` stroke-dasharray="${p.dash.join(' ')}"` : ''}${p.cls ? ` class="${p.cls}"` : ''}/>`;
+    if (p.t === 'text') return `<text x="${f(p.x)}" y="${f(p.y)}" font-size="${p.size}" fill="${p.color}" text-anchor="${p.anchor}"${p.bold ? ' font-weight="700"' : ''}${p.rot ? ` transform="rotate(${p.rot} ${f(p.x)} ${f(p.y)})"` : ''}>${esc(p.s)}</text>`;
+    if (p.t === 'circle') return `<circle cx="${f(p.x)}" cy="${f(p.y)}" r="${p.r}" stroke="${p.color}" stroke-width="${p.w}" fill="${p.fill || 'none'}"/>`;
+    if (p.t === 'rect') return `<rect x="${f(p.x)}" y="${f(p.y)}" width="${f(p.w)}" height="${f(p.h)}" stroke="${p.color}" stroke-width="${p.lw}" fill="${p.fill || 'none'}"/>`;
+    if (p.t === 'poly') return `<polygon points="${p.pts.map((q) => q.map(f).join(',')).join(' ')}" fill="${p.fill}"/>`;
+    return '';
+  };
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${SHEET.W} ${SHEET.H}" width="${SHEET.W * 3}" height="${SHEET.H * 3}" font-family="Helvetica, Arial, sans-serif" stroke-linecap="round">
+    <rect width="${SHEET.W}" height="${SHEET.H}" fill="#ffffff"/>
+    ${loose.filter((p) => p.t !== 'text').map(one).join('')}
+    ${[...byUid.entries()].map(([uid, ps]) => `<g class="pe" data-uid="${uid}">${ps.map(one).join('')}</g>`).join('')}
+    ${loose.filter((p) => p.t === 'text').map(one).join('')}
+  </svg>`;
+}
+function primsToPdf(doc, P) {
+  const rgb = (h) => hexRgb(h.length === 4 ? '#' + [...h.slice(1)].map((c) => c + c).join('') : h);
+  for (const p of P) {
+    if (p.t === 'line') {
+      doc.setDrawColor(...rgb(p.color)); doc.setLineWidth(p.w);
+      doc.setLineDashPattern(p.dash || [], 0);
+      doc.line(p.x1, p.y1, p.x2, p.y2);
+      if (p.dash) doc.setLineDashPattern([], 0);
+    } else if (p.t === 'circle') {
+      doc.setDrawColor(...rgb(p.color)); doc.setLineWidth(p.w);
+      if (p.fill) { doc.setFillColor(...rgb(p.fill)); doc.circle(p.x, p.y, p.r, 'FD'); } else doc.circle(p.x, p.y, p.r, 'S');
+    } else if (p.t === 'rect') {
+      doc.setDrawColor(...rgb(p.color)); doc.setLineWidth(p.lw);
+      if (p.fill) { doc.setFillColor(...rgb(p.fill)); doc.rect(p.x, p.y, p.w, p.h, 'FD'); } else doc.rect(p.x, p.y, p.w, p.h, 'S');
+    } else if (p.t === 'poly') {
+      doc.setFillColor(...rgb(p.fill));
+      const [s0, ...rest] = p.pts;
+      doc.lines(rest.map((q, i) => [q[0] - (i ? rest[i - 1][0] : s0[0]), q[1] - (i ? rest[i - 1][1] : s0[1])]), s0[0], s0[1], [1, 1], 'F', true);
+    } else if (p.t === 'text') {
+      doc.setFont('helvetica', p.bold ? 'bold' : 'normal');
+      doc.setFontSize(p.size / 0.3528);
+      doc.setTextColor(...rgb(p.color));
+      doc.text(pdfText(p.s), p.x, p.y, { align: p.anchor === 'middle' ? 'center' : p.anchor === 'end' ? 'right' : 'left', angle: p.rot ? -p.rot : 0 });
+    }
+  }
+}
+function planFor(index) {
+  if (!planCache.has(index)) {
+    const s = M.storeys[index];
+    const sheets = M.storeys.filter(storeyHasGeometry);
+    const no = `A-${String(100 + sheets.indexOf(s) + 1)}`;
+    const plan = slicePlan(s);
+    planCache.set(index, { plan, ...layoutPlan(plan, no) });
+  }
+  return planCache.get(index);
+}
+async function floorPlansPdf(indices) {
+  indices = indices || M.storeys.filter(storeyHasGeometry).map((s) => s.index);
+  if (!indices.length) return toast('There is nothing to draw on any storey.', true);
+  const jsPDF = await getPdf();
+  const doc = new jsPDF({ unit: 'mm', format: 'a3', orientation: 'landscape' });
+  for (let i = 0; i < indices.length; i++) {
+    showBusy(`Drawing ${M.storeys[indices[i]].name}… ${i + 1} of ${indices.length}`);
+    await nextFrame();
+    if (i) doc.addPage('a3', 'landscape');
+    primsToPdf(doc, planFor(indices[i]).prims);
+  }
+  hideBusy();
+  doc.save(indices.length === 1 ? `${reportBase()}-${M.storeys[indices[0]].name.replace(/[^\w.-]+/g, '_')}-plan.pdf` : `${reportBase()}-floor-plans.pdf`);
+  toast(`Saved ${indices.length} floor plan${indices.length > 1 ? 's' : ''} as a vector PDF.`);
+}
+
+/* ---------- drawings viewer ---------- */
+const dwg = { open: false, current: null, sheets: [], seq: 0, z: { s: 1, x: 0, y: 0 }, page: 1 };
+function openDrawings() {
+  if (!M) return;
+  dwg.open = true;
+  $('#dwg').hidden = false;
+  $('#btnDwg').setAttribute('aria-pressed', true);
+  renderDwgList();
+  if (!dwg.current) {
+    const first = M.storeys.find(storeyHasGeometry);
+    if (first) openPlan(first.index); else if (dwg.sheets.length) openSheet(dwg.sheets[0]);
+  } else renderDwgView();
+}
+function closeDrawings() {
+  dwg.open = false;
+  $('#dwg').hidden = true;
+  $('#btnDwg').setAttribute('aria-pressed', false);
+}
+$('#btnDwg').addEventListener('click', () => (dwg.open ? closeDrawings() : openDrawings()));
+function renderDwgList() {
+  const plans = M.storeys.filter(storeyHasGeometry);
+  const cur = dwg.current;
+  $('#dwgPlans').innerHTML = plans.length ? plans.map((s) => `<button class="dwg-item ${cur?.kind === 'plan' && cur.storey === s.index ? 'on' : ''}" data-plan="${s.index}">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2" y="2" width="12" height="12"/><path d="M2 8h6v6M8 2v3"/></svg>
+      <span><b>${esc(s.name)}</b><small>Floor plan${liveFiles().length > 1 ? ' · ' + esc(M.files[s.file].name) : ''}</small></span></button>`).join('')
+    : '<p class="muted">No storeys with geometry.</p>';
+  $('#dwgSheets').innerHTML = dwg.sheets.length ? dwg.sheets.map((d) => `<div class="dwg-item ${cur?.kind === 'sheet' && cur.sheet === d ? 'on' : ''}" data-sheet="${d.id}" role="button" tabindex="0">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 1.5h7l3 3v10H3z"/><path d="M10 1.5v3h3"/></svg>
+      <span><b>${esc(d.name)}</b><small>${d.kind === 'pdf' ? `${d.pages} page${d.pages > 1 ? 's' : ''} · PDF` : 'Image'}</small></span>
+      <button class="eye" data-unsheet="${d.id}" aria-label="Remove ${esc(d.name)}">✕</button></div>`).join('')
+    : '<p class="muted dwg-empty">Add the PDF sheets exported from Revit, or photos and scans of drawings. They stay on your computer.</p>';
+}
+$('#dwgPlans').addEventListener('click', (e) => { const b = e.target.closest('[data-plan]'); if (b) openPlan(+b.dataset.plan); });
+$('#dwgSheets').addEventListener('click', (e) => {
+  const x = e.target.closest('[data-unsheet]');
+  if (x) {
+    const d = dwg.sheets.find((s) => s.id === +x.dataset.unsheet);
+    dwg.sheets.splice(dwg.sheets.indexOf(d), 1);
+    URL.revokeObjectURL(d.url);
+    if (dwg.current?.sheet === d) dwg.current = null;
+    renderDwgList();
+    if (!dwg.current) { $('#dwgCanvas').innerHTML = ''; $('#dwgTitle').textContent = 'Choose a drawing'; }
+    return;
+  }
+  const b = e.target.closest('[data-sheet]');
+  if (b) openSheet(dwg.sheets.find((s) => s.id === +b.dataset.sheet));
+});
+function openPlan(index) {
+  showBusy(`Drawing ${M.storeys[index].name}…`);
+  try {
+    planFor(index);
+  } finally { hideBusy(); }
+  dwg.current = { kind: 'plan', storey: index };
+  dwg.page = 1;
+  renderDwgList();
+  renderDwgView(true);
+}
+function openSheet(d) {
+  dwg.current = { kind: 'sheet', sheet: d };
+  dwg.page = 1;
+  renderDwgList();
+  renderDwgView(true);
+}
+async function renderDwgView(fit) {
+  const cur = dwg.current, canvas = $('#dwgCanvas');
+  $('#dwgPager').hidden = !(cur?.kind === 'sheet' && cur.sheet.kind === 'pdf' && cur.sheet.pages > 1);
+  $('#dwgPlanPdf').hidden = cur?.kind !== 'plan';
+  $('#dwgHint').hidden = cur?.kind !== 'plan';
+  if (!cur) return;
+  if (cur.kind === 'plan') {
+    const p = planFor(cur.storey);
+    $('#dwgTitle').textContent = `${M.storeys[cur.storey].name} · Floor plan · 1:${p.den}`;
+    canvas.innerHTML = primsToSvg(p.prims);
+    syncPlanSelection();
+  } else {
+    const d = cur.sheet;
+    $('#dwgTitle').textContent = d.name + (d.kind === 'pdf' && d.pages > 1 ? ` · page ${dwg.page} of ${d.pages}` : '');
+    $('#dwgPageNo').textContent = `${dwg.page} / ${d.pages || 1}`;
+    if (d.kind === 'image') canvas.innerHTML = `<img src="${d.url}" alt="${esc(d.name)}" draggable="false">`;
+    else {
+      canvas.innerHTML = '<p class="muted dwg-loading">Rendering page…</p>';
+      const page = await d.pdf.getPage(dwg.page);
+      const vp = page.getViewport({ scale: Math.min(4, 2600 / page.getViewport({ scale: 1 }).width) });
+      const cv = document.createElement('canvas');
+      cv.width = vp.width; cv.height = vp.height;
+      await page.render({ canvasContext: cv.getContext('2d'), viewport: vp }).promise;
+      if (dwg.current?.sheet !== d) return;
+      canvas.innerHTML = '';
+      canvas.appendChild(cv);
+    }
+  }
+  if (fit) requestAnimationFrame(fitDwg);
+}
+function dwgContentSize() {
+  const c = $('#dwgCanvas').firstElementChild;
+  if (!c) return null;
+  return { w: c.width?.baseVal?.value || c.naturalWidth || c.width || c.offsetWidth, h: c.height?.baseVal?.value || c.naturalHeight || c.height || c.offsetHeight };
+}
+function applyDwgTransform() {
+  const c = $('#dwgCanvas');
+  c.style.transform = `translate(${dwg.z.x}px, ${dwg.z.y}px) scale(${dwg.z.s})`;
+}
+function fitDwg() {
+  const v = $('#dwgView'), sz = dwgContentSize();
+  if (!sz || !sz.w) { const img = $('#dwgCanvas img'); if (img && !img.complete) img.onload = fitDwg; return; }
+  const s = Math.min((v.clientWidth - 24) / sz.w, (v.clientHeight - 24) / sz.h);
+  dwg.z = { s, x: (v.clientWidth - sz.w * s) / 2, y: (v.clientHeight - sz.h * s) / 2 };
+  applyDwgTransform();
+}
+function zoomDwg(f, cx, cy) {
+  const v = $('#dwgView').getBoundingClientRect();
+  cx = cx ?? v.width / 2; cy = cy ?? v.height / 2;
+  const s = Math.max(0.05, Math.min(40, dwg.z.s * f));
+  dwg.z.x = cx - ((cx - dwg.z.x) * s) / dwg.z.s;
+  dwg.z.y = cy - ((cy - dwg.z.y) * s) / dwg.z.s;
+  dwg.z.s = s;
+  applyDwgTransform();
+}
+$('#dwgView').addEventListener('wheel', (e) => {
+  e.preventDefault();
+  const r = $('#dwgView').getBoundingClientRect();
+  zoomDwg(Math.exp(-e.deltaY * 0.0015), e.clientX - r.left, e.clientY - r.top);
+}, { passive: false });
+let dwgDrag = null;
+$('#dwgView').addEventListener('pointerdown', (e) => {
+  dwgDrag = { x: e.clientX, y: e.clientY, ox: dwg.z.x, oy: dwg.z.y, moved: false };
+  $('#dwgView').setPointerCapture(e.pointerId);
+});
+$('#dwgView').addEventListener('pointermove', (e) => {
+  if (!dwgDrag) return;
+  const dx = e.clientX - dwgDrag.x, dy = e.clientY - dwgDrag.y;
+  if (Math.hypot(dx, dy) > 4) dwgDrag.moved = true;
+  dwg.z.x = dwgDrag.ox + dx; dwg.z.y = dwgDrag.oy + dy;
+  applyDwgTransform();
+});
+$('#dwgView').addEventListener('pointerup', (e) => {
+  const moved = dwgDrag?.moved;
+  dwgDrag = null;
+  if (moved || dwg.current?.kind !== 'plan') return;
+  const r = $('#dwgView').getBoundingClientRect();
+  const px = (e.clientX - r.left - dwg.z.x) / dwg.z.s / 3, py = (e.clientY - r.top - dwg.z.y) / dwg.z.s / 3;
+  const tol = Math.max(0.8, 8 / dwg.z.s / 3);
+  let best = null, bd = tol;
+  for (const pr of planFor(dwg.current.storey).prims) {
+    if (!pr.uid) continue;
+    let d;
+    if (pr.t === 'line') {
+      const vx = pr.x2 - pr.x1, vy = pr.y2 - pr.y1, l2 = vx * vx + vy * vy || 1;
+      const t = Math.max(0, Math.min(1, ((px - pr.x1) * vx + (py - pr.y1) * vy) / l2));
+      d = Math.hypot(px - (pr.x1 + t * vx), py - (pr.y1 + t * vy));
+    } else if (pr.t === 'text') d = Math.hypot(px - pr.x, py - pr.y) * 0.6;
+    else continue;
+    if (d < bd) { bd = d; best = pr.uid; }
+  }
+  select(best ? M.byUid.get(best) : null);
+});
+$('#dwgZoomIn').addEventListener('click', () => zoomDwg(1.4));
+$('#dwgZoomOut').addEventListener('click', () => zoomDwg(1 / 1.4));
+$('#dwgFit').addEventListener('click', fitDwg);
+$('#dwgClose').addEventListener('click', closeDrawings);
+$('#dwgPrev').addEventListener('click', () => { if (dwg.page > 1) { dwg.page--; renderDwgView(true); } });
+$('#dwgNext').addEventListener('click', () => { const d = dwg.current?.sheet; if (d && dwg.page < d.pages) { dwg.page++; renderDwgView(true); } });
+$('#dwgPlanPdf').addEventListener('click', () => floorPlansPdf([dwg.current.storey]).catch(clashExportFailed));
+$('#dwgAllPdf').addEventListener('click', () => floorPlansPdf().catch(clashExportFailed));
+$('#dwgShow3d').addEventListener('click', () => { const el = state.selected; closeDrawings(); if (el) zoomTo(el); });
+function syncPlanSelection() {
+  if (!dwg.open) return;
+  document.querySelectorAll('#dwgCanvas .pe.sel').forEach((g) => g.classList.remove('sel'));
+  if (state.selected) document.querySelector(`#dwgCanvas .pe[data-uid="${state.selected.uid}"]`)?.classList.add('sel');
+  $('#dwgShow3d').hidden = !state.selected;
+}
+function centerPlanOn(el) {
+  const g = document.querySelector(`#dwgCanvas .pe[data-uid="${el.uid}"]`);
+  if (!g) return toast(`${el.name} is not cut by this floor plan.`);
+  const bb = g.getBBox(), v = $('#dwgView');
+  const px = (bb.x + bb.width / 2) * 3, py = (bb.y + bb.height / 2) * 3;
+  dwg.z.s = Math.max(dwg.z.s, 1.6);
+  dwg.z.x = v.clientWidth / 2 - px * dwg.z.s;
+  dwg.z.y = v.clientHeight / 2 - py * dwg.z.s;
+  applyDwgTransform();
+}
+
+/* uploaded sheets: PDFs via pdf.js, images as they are */
+let pdfjsReady = null;
+function getPdfJs() {
+  return (pdfjsReady ||= (async () => {
+    const base = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/';
+    await loadScript(base + 'pdf.min.js');
+    const worker = await (await fetch(base + 'pdf.worker.min.js')).text();
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc = URL.createObjectURL(new Blob([worker], { type: 'text/javascript' }));
+    return window.pdfjsLib;
+  })().catch((err) => { pdfjsReady = null; throw err; }));
+}
+async function addSheets(files) {
+  const list = [...files].filter((f) => /\.(pdf|png|jpe?g|webp|gif)$/i.test(f.name));
+  if (!list.length) return toast('Choose PDF or image files (PNG, JPG).', true);
+  let last;
+  for (const f of list) {
+    const d = { id: ++dwg.seq, name: f.name.replace(/\.[^.]+$/, ''), url: URL.createObjectURL(f) };
+    try {
+      if (/\.pdf$/i.test(f.name)) {
+        showBusy(`Opening ${f.name}…`);
+        const lib = await getPdfJs();
+        d.pdf = await lib.getDocument({ data: new Uint8Array(await f.arrayBuffer()) }).promise;
+        d.kind = 'pdf'; d.pages = d.pdf.numPages;
+      } else { d.kind = 'image'; d.pages = 1; }
+      dwg.sheets.push(d);
+      last = d;
+    } catch (err) {
+      console.error(err);
+      toast(`Couldn't open ${f.name}: ${err.message || err}`, true);
+    } finally { hideBusy(); }
+  }
+  if (last) { if (!dwg.open) openDrawings(); openSheet(last); }
+}
+$('#dwgFile').addEventListener('change', (e) => { addSheets(e.target.files); e.target.value = ''; });
+
 /* ---------- panels (narrow screens) ---------- */
 function closePanels() {
   ['treePanel', 'propsPanel'].forEach((id) => $('#' + id).classList.remove('open'));
@@ -3216,7 +4026,10 @@ stage.addEventListener('dragover', (e) => e.preventDefault());
 stage.addEventListener('dragleave', () => { if (--dragDepth <= 0) { dragDepth = 0; $('#dropHint').hidden = true; } });
 stage.addEventListener('drop', (e) => {
   e.preventDefault(); dragDepth = 0; $('#dropHint').hidden = true;
-  openIfcFiles(e.dataTransfer.files, true);
+  const all = [...e.dataTransfer.files];
+  const sheetsIn = all.filter((f) => /\.(pdf|png|jpe?g|webp|gif)$/i.test(f.name));
+  if (sheetsIn.length) addSheets(sheetsIn);
+  if (all.some((f) => /\.ifc$/i.test(f.name)) || !sheetsIn.length) openIfcFiles(all.filter((f) => !sheetsIn.includes(f)), true);
 });
 
 /* ---------- misc UI ---------- */

@@ -61,6 +61,16 @@ Libraries are loaded from cdn.jsdelivr.net, so the browser needs internet access
   and shows as a pin in 3D. Running a test again keeps statuses and marks fixed clashes Resolved.
   Download a PDF clash report (a real PDF file with a close-up picture of every clash), a CSV, or
   BCF 2.1 for Revit, Navisworks, BIMcollab and Solibri
+- **Drawings**: a floor plan of every storey generated from the model (cut walls and columns,
+  everything below the cut, grid with bubbles, column numbers, rooms with areas, dimension strings,
+  north arrow, scale bar and an A3 title block at a standard scale), viewable in the browser and
+  downloadable as a vector PDF. Click anything in a plan to see its properties. You can also add
+  your own drawing sheets (PDF or images, e.g. exported from Revit) and view them next to the model
+- **Grid and column numbers**: gridlines with bubbles and a number tag on every column in 3D. The
+  grid comes from the IFC file (IfcGrid); if the file has none, it is worked out from where the
+  columns stand
+- **Find**: the search box (or `/`) jumps to any element by column number (e.g. B2), name, tag or
+  GlobalId
 - **Snapshots**: the camera button (or `S`) saves a high-resolution image of the view with a small title
   block. Download it as PNG, copy it to the clipboard, rename it, jump back to its view, or save all
   snapshots as a PDF sheet. Snapshots are also added to the model report
